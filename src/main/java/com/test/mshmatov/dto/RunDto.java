@@ -12,13 +12,13 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Builder
 @Validated
-public class RunsDto {
+public class RunDto {
 
     @NotNull
     private Integer id;
 
     @NotNull
-    private Integer userId;
+    private UserDto userDto;
 
     @NotNull
     private Float startLatitude;

@@ -9,44 +9,42 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @IT
 @AutoConfigureMockMvc
 @RequiredArgsConstructor
-public class UserRestControllerIT extends BaseTest {
+public class RunRestControllerIT extends BaseTest {
     private final ObjectMapper objectMapper;
     private final MockMvc mockMvc;
 
     @Test
     void findById() throws Exception {
-        mockMvc.perform(get("/api/v1/users/1"))
+        mockMvc.perform(get("/api/v1/runs/1"))
                 .andExpect(status().is2xxSuccessful());
     }
 
     @Test
     void getAll() throws Exception {
-        mockMvc.perform(get("/api/v1/users"))
+        mockMvc.perform(get("/api/v1/runs"))
                 .andExpect(status().is2xxSuccessful());
     }
 
     @Test
     void create() throws Exception {
-        mockMvc.perform(post("/api/v1/users")
+        mockMvc.perform(post("/api/v1/runs")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(USER_DTO)))
+                        .content(objectMapper.writeValueAsString(RUN_DTO)))
                 .andExpect(status().is2xxSuccessful());
     }
 
     @Test
     void update() throws Exception {
-        mockMvc.perform(put("/api/v1/users")
+        mockMvc.perform(put("/api/v1/runs")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(USER_DTO)))
+                        .content(objectMapper.writeValueAsString(RUN_DTO)))
                 .andExpect(status().is2xxSuccessful());
     }
 

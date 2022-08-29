@@ -1,16 +1,16 @@
 package com.test.mshmatov.database.repositories;
 
-import com.test.mshmatov.database.entities.RunsEntity;
+import com.test.mshmatov.database.entities.RunEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface RunsRepository  extends JpaRepository<RunsEntity, Integer> {
+public interface RunRepository extends JpaRepository<RunEntity, Integer> {
 
-    Optional<RunsEntity> findById(Integer id);
+    Optional<RunEntity> findById(Integer id);
 
-    List<RunsEntity> getAllBy();
+    List<RunEntity> getAllBy();
 
     void removeById(Integer id);
 

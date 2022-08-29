@@ -16,8 +16,8 @@ public class UserMapper implements Mapper<UserEntity, UserDto> {
                 entity.getId(),
                 entity.getFirstName(),
                 entity.getLastName(),
-                String.valueOf(entity.getBirthDate()),
-                String.valueOf(entity.getGender())
+                entity.getBirthDate().toString(),
+                entity.getGender().getAlias()
         );
     }
 

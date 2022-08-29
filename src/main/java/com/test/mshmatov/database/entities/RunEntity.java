@@ -14,14 +14,14 @@ import java.time.OffsetDateTime;
 @Builder
 @Entity
 @Table(name = "runs")
-public class RunsEntity implements BaseEntity<Integer> {
+public class RunEntity implements BaseEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity userId;
+    private UserEntity userEntity;
 
     @Column(name = "start_latitude", nullable = false)
     private Float startLatitude;
