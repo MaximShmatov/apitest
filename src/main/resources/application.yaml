@@ -19,7 +19,7 @@ spring:
 
 server:
   port:
-    8084
+    8485
 
 #db:
 #  username: postgres

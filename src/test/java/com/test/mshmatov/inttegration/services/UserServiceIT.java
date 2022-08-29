@@ -2,8 +2,7 @@ package com.test.mshmatov.inttegration.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.test.mshmatov.database.entities.GenderType;
-import com.test.mshmatov.database.entities.UserEntity;
+import com.test.mshmatov.dto.UserDto;
 import com.test.mshmatov.inttegration.annotation.IT;
 import com.test.mshmatov.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -31,29 +30,30 @@ public class UserServiceIT {
 
     @Test
     void deleteUserById() {
-        assertEquals(userService.deleteById(USER_ID), USER_ID);
+        assertTrue(userService.deleteById(USER_ID));
         assertFalse(userService.findById(USER_ID).isPresent());
     }
 
     @Test
     void updateUser() {
-        var user = userService.findById(USER_ID)
-                .map(u -> {
-                    u.setLastName("lastname");
-                    return userService.update(u);
+        UserDto userDto = userService.findById(USER_ID)
+                .map(user -> {
+                    user.setLastName("lastname");
+                    return userService.update(user).orElse(null);
                 })
                 .orElse(null);
-        assertNotNull(user);
-        assertEquals(user.getLastName(), "lastname");
+        assertNotNull(userDto);
+        assertEquals(userDto.getLastName(), "lastname");
     }
 
     @Test
     void createUser() {
-        UserEntity user = UserEntity.builder()
+        UserDto user = UserDto.builder()
+                .id(1)
                 .firstName("firstName")
                 .lastName("lastName")
-                .birthDate(LocalDate.now())
-                .gender(GenderType.W)
+                .birthDate(LocalDate.now().toString())
+                .gender("W")
                 .build();
         userService.create(user);
         assertEquals(userService.getAll().size(), 4);

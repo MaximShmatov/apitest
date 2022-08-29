@@ -2,6 +2,8 @@ package com.test.mshmatov.services;
 
 import com.test.mshmatov.database.entities.UserEntity;
 import com.test.mshmatov.database.repositories.UserRepository;
+import com.test.mshmatov.dto.UserDto;
+import com.test.mshmatov.mappers.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,28 +14,40 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public Optional<UserEntity> findById(Integer id) {
-        return userRepository.findById(id);
+    public Optional<UserDto> findById(Integer id) {
+        return userRepository.findById(id)
+                .map(userMapper::mapEntityToDto);
     }
 
-    public List<UserEntity> getAll() {
-        return userRepository.getAllBy();
+    public List<UserDto> getAll() {
+        return Optional.ofNullable(userRepository.getAllBy())
+                .map(users -> users.stream().map(userMapper::mapEntityToDto).toList())
+                .orElse(List.of());
     }
 
-    public int deleteById(Integer id) {
-        return userRepository.removeById(id);
-    }
-
-    public UserEntity update(UserEntity user) {
-        if (userRepository.existsById(user.getId())) {
-            return userRepository.save(user);
+    public boolean deleteById(Integer id) {
+        if (userRepository.existsById(id)) {
+            userRepository.removeById(id);
+            return true;
         }
-        return null;
+        return false;
     }
 
-    public UserEntity create(UserEntity user) {
-        user.setId(null);
-        return userRepository.save(user);
+    public Optional<UserDto> update(UserDto user) {
+        UserDto updatedUser = null;
+        if (userRepository.existsById(user.getId())) {
+            updatedUser = userMapper.mapEntityToDto(
+                    userRepository.save(userMapper.mapDtoToEntity(user))
+            );
+        }
+        return Optional.ofNullable(updatedUser);
+    }
+
+    public UserDto create(UserDto user) {
+        UserEntity userEntity = userMapper.mapDtoToEntity(user);
+        userEntity.setId(null);
+        return userMapper.mapEntityToDto(userRepository.save(userEntity));
     }
 }

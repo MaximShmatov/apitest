@@ -7,29 +7,33 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Data
 @AllArgsConstructor
 @Builder
 @Validated
-public class UserDto {
+public class RunsDto {
 
     @NotNull
     private Integer id;
 
-    @NotBlank
-    private String firstName;
+    @NotNull
+    private Integer userId;
+
+    @NotNull
+    private Float startLatitude;
+
+    @NotNull
+    private Float startLongitude;
 
     @NotBlank
-    private String lastName;
+    private String startDatetime;
 
-    @NotBlank
-    private String birthDate;
+    private Float finishLatitude;
 
-    @NotBlank
-    @Size(min = 1, max = 2)
-    private String gender;
+    private Float finishLongitude;
 
+    private String finishDatetime;
+
+    private Integer distance;
 }
-
