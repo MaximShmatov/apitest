@@ -1,0 +1,29 @@
+spring:
+
+  application:
+    name: mshmatov
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mshmatov_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+#default:
+#  rest:
+#    security:
+#      enabled: false
+
+server:
+  port:
+    8084
+
+#db:
+#  username: postgres
+#  password: postgres
+#  url: localhost
+#  name: mshmatov_db
+#  maximumPoolSize: 20
