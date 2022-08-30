@@ -1,8 +1,8 @@
-package com.test.mshmatov.inttegration.web.rest;
+package com.test.mshmatov.integration.web.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.test.mshmatov.BaseTest;
-import com.test.mshmatov.inttegration.annotation.IT;
+import com.test.mshmatov.integration.annotation.IT;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

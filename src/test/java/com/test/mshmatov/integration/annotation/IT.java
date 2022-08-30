@@ -1,6 +1,6 @@
-package com.test.mshmatov.inttegration.annotation;
+package com.test.mshmatov.integration.annotation;
 
-import com.test.mshmatov.inttegration.TestMshmatovApplication;
+import com.test.mshmatov.integration.TestMshmatovApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestConstructor;

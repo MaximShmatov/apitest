@@ -7,5 +7,5 @@ import lombok.*;
 @Builder
 public class AverageSpeedStatDto {
     private RunDto run;
-    private Float averageSpeed;
+    private Long averageSpeed;
 }

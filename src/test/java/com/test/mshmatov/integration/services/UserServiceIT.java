@@ -1,9 +1,9 @@
-package com.test.mshmatov.inttegration.services;
+package com.test.mshmatov.integration.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.test.mshmatov.dto.UserDto;
-import com.test.mshmatov.inttegration.annotation.IT;
+import com.test.mshmatov.integration.annotation.IT;
 import com.test.mshmatov.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

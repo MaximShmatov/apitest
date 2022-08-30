@@ -22,8 +22,9 @@ public interface RunRepository extends JpaRepository<RunEntity, Integer> {
 
     @Query("select r from RunEntity r " +
             "where r.userEntity.id = :userId " +
-            "and r.startDatetime >= :fromDatetime " +
-            "and r.finishDatetime <= :toDatetime")
-    List<RunEntity> findAllByUserAndStartDateRange(Integer userId, OffsetDateTime fromDatetime, OffsetDateTime toDatetime);
+            "and r.startDatetime >= :fromDate " +
+            "and r.startDatetime <= :toDate")
+    List<RunEntity> findAllByUserAndStartDateRange(Integer userId, OffsetDateTime fromDate, OffsetDateTime toDate);
+
 
 }

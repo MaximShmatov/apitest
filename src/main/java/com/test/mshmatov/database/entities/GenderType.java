@@ -13,7 +13,7 @@ public enum GenderType {
     }
 
     public static GenderType of(String gender) {
-        String genderAlias = gender.trim().toLowerCase();
+        String genderAlias = gender.trim().toUpperCase();
         for (GenderType value : values()) {
             if (value.alias.equals(genderAlias)) {
                 return value;

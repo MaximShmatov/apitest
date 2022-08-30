@@ -1,16 +1,18 @@
-package com.test.mshmatov.inttegration.web.rest;
+package com.test.mshmatov.integration.web.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.test.mshmatov.BaseTest;
-import com.test.mshmatov.inttegration.annotation.IT;
+import com.test.mshmatov.integration.annotation.IT;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @IT
@@ -19,12 +21,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class RunRestControllerIT extends BaseTest {
     private final ObjectMapper objectMapper;
     private final MockMvc mockMvc;
-
-//    @Test
-//    void getUserRunsStat() throws Exception {
-//        mockMvc.perform(get("/api/v1/runs/1/2022-06-01 00:00:00+03/2022-06-20 00:00:00+03"))
-//                .andExpect(status().is2xxSuccessful());
-//    }
 
     @Test
     void findById() throws Exception {

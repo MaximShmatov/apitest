@@ -5,14 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Data
 @AllArgsConstructor
 @Builder
 @Validated
 public class RunStartDto {
+    private static final String REGEXP = "(\\d{4}-\\d{2}-\\d{2})[A-Z]+(\\d{2}:\\d{2}:\\d{2}).([0-9+-:]+)";
 
     @NotNull
     private Integer userId;
@@ -23,7 +24,7 @@ public class RunStartDto {
     @NotNull
     private Float startLongitude;
 
-    @NotBlank
+    @Pattern(regexp = REGEXP)
     private String startDatetime;
 
 }

@@ -1,4 +1,4 @@
-package com.test.mshmatov.inttegration;
+package com.test.mshmatov.integration;
 
 import org.springframework.boot.test.context.TestConfiguration;
 
