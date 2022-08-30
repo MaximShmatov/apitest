@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "api/v1/runs")
-public class RunRestController {
+public class RunRestController extends BaseController {
     private final RunService runService;
 
     @GetMapping("/{id}")
