@@ -20,6 +20,12 @@ public class RunRestControllerIT extends BaseTest {
     private final ObjectMapper objectMapper;
     private final MockMvc mockMvc;
 
+//    @Test
+//    void getUserRunsStat() throws Exception {
+//        mockMvc.perform(get("/api/v1/runs/1/2022-06-01 00:00:00+03/2022-06-20 00:00:00+03"))
+//                .andExpect(status().is2xxSuccessful());
+//    }
+
     @Test
     void findById() throws Exception {
         mockMvc.perform(get("/api/v1/runs/1"))
