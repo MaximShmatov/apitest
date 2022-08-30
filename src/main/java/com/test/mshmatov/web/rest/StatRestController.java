@@ -1,6 +1,7 @@
 package com.test.mshmatov.web.rest;
 
 import com.test.mshmatov.dto.AverageSpeedStatDto;
+import com.test.mshmatov.dto.UserStatDto;
 import com.test.mshmatov.services.StatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -35,7 +36,7 @@ public class StatRestController {
     }
 
     @GetMapping("/user")
-    public List<AverageSpeedStatDto> getUserStat(
+    public UserStatDto getUserStat(
             @RequestParam(name = "userId")
             @NotNull
             Integer userId,
@@ -47,6 +48,6 @@ public class StatRestController {
             @RequestParam(name = "toDatetime")
             @Pattern(regexp = REGEXP)
             String toDatetime) {
-        return statService.getUserRunsStat(userId, fromDatetime, toDatetime);
+        return statService.getUserStat(userId, fromDatetime, toDatetime);
     }
 }

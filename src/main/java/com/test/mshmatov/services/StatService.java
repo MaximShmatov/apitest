@@ -49,14 +49,14 @@ public class StatService {
     }
 
     private UserStatDto calculateUserStat(List<RunEntity> runs) {
-        Integer runsQuantity = runs.size();
+        int runsQuantity = runs.size();
         AtomicReference<Long> totalDistance = new AtomicReference<>(0L);
         AtomicReference<Long> totalSpeed = new AtomicReference<>(0L);
-        Long averageSpeed = runsQuantity == 0 ? 0 : totalSpeed.get() / runsQuantity;
         runs.forEach(run -> {
             totalDistance.set(totalDistance.get() + run.getDistance());
             totalSpeed.set(totalSpeed.get() + calculateAverageSpeed(run));
         });
+        Long averageSpeed = runsQuantity == 0 ? 0 : totalSpeed.get() / runsQuantity;
         return new UserStatDto(runsQuantity, totalDistance.get(), averageSpeed);
     }
 
