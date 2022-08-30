@@ -2,11 +2,15 @@ package com.test.mshmatov.services;
 
 import com.test.mshmatov.database.entities.RunEntity;
 import com.test.mshmatov.database.repositories.RunRepository;
+import com.test.mshmatov.database.repositories.UserRepository;
 import com.test.mshmatov.dto.RunDto;
+import com.test.mshmatov.dto.RunFinishDto;
+import com.test.mshmatov.dto.RunStartDto;
 import com.test.mshmatov.mappers.RunMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class RunService {
     private final RunRepository runRepository;
+    private final UserRepository userRepository;
     private final RunMapper runMapper;
 
     public Optional<RunDto> findById(Integer id) {
@@ -50,4 +55,33 @@ public class RunService {
         runEntity.setId(null);
         return runMapper.mapEntityToDto(runRepository.save(runEntity));
     }
+
+    public Optional<RunDto> addRunStart(RunStartDto run) {
+        RunDto runStart = userRepository.findById(run.getUserId())
+                .map(userEntity -> {
+                    var runEntity = RunEntity.builder()
+                            .userEntity(userEntity)
+                            .startLatitude(run.getStartLatitude())
+                            .startLongitude(run.getStartLongitude())
+                            .startDatetime(OffsetDateTime.parse(run.getStartDatetime()))
+                            .build();
+                    return runMapper.mapEntityToDto(runRepository.save(runEntity));
+                })
+                .orElse(null);
+        return Optional.ofNullable(runStart);
+    }
+
+    public Optional<RunDto> setRunFinish(RunFinishDto run) {
+        RunDto runDto = runRepository.findByIdAndUserEntityId(run.getRunId(), run.getUserId())
+                .map(runEntity -> {
+                    runEntity.setFinishLatitude(run.getFinishLatitude());
+                    runEntity.setFinishLongitude(run.getFinishLongitude());
+                    runEntity.setFinishDatetime(OffsetDateTime.parse(run.getFinishDatetime()));
+                    return runMapper.mapEntityToDto(runRepository.save(runEntity));
+                })
+                .orElse(null);
+        return Optional.ofNullable(runDto);
+    }
+
+
 }

@@ -54,4 +54,20 @@ public class RunRestControllerIT extends BaseTest {
                 .andExpect(status().is2xxSuccessful());
     }
 
+    @Test
+    void addRunStart() throws Exception {
+        mockMvc.perform(post("/api/v1/runs/start")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(RUN_START_DTO)))
+                .andExpect(status().is2xxSuccessful());
+    }
+
+    @Test
+    void setRunFinish() throws Exception {
+        mockMvc.perform(put("/api/v1/runs/finish")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(RUN_FINISH_DTO)))
+                .andExpect(status().is2xxSuccessful());
+    }
+
 }
