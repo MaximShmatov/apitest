@@ -6,6 +6,7 @@ import com.test.mshmatov.dto.UserDto;
 import com.test.mshmatov.mappers.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +28,7 @@ public class UserService {
                 .orElse(List.of());
     }
 
+    @Transactional
     public boolean deleteById(Integer id) {
         if (userRepository.existsById(id)) {
             userRepository.removeById(id);

@@ -25,7 +25,7 @@ public class UserServiceIT {
 
     @Test
     void getAllUsers() {
-        assertEquals(userService.getAll().size(), 3);
+        assertEquals(userService.getAll().size(), 4);
     }
 
     @Test
@@ -56,6 +56,6 @@ public class UserServiceIT {
                 .gender("W")
                 .build();
         userService.create(user);
-        assertEquals(userService.getAll().size(), 4);
+        assertEquals(userService.getAll().size(), 5);
     }
 }

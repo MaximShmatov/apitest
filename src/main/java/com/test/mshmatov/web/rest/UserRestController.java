@@ -4,6 +4,7 @@ import com.test.mshmatov.dto.UserDto;
 import com.test.mshmatov.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -29,18 +30,18 @@ public class UserRestController extends BaseController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDto create(@RequestBody UserDto user) {
+    public UserDto create(@RequestBody @Validated UserDto user) {
         return userService.create(user);
     }
 
     @PutMapping
-    public UserDto update(@RequestBody UserDto user) {
+    public UserDto update(@RequestBody @Validated UserDto user) {
         return userService.update(user)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public void deleteById(@PathVariable Integer id) {
         if (!userService.deleteById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);

@@ -9,6 +9,7 @@ import com.test.mshmatov.dto.RunStartDto;
 import com.test.mshmatov.mappers.RunMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -32,6 +33,7 @@ public class RunService {
                 .orElse(List.of());
     }
 
+    @Transactional
     public boolean deleteById(Integer id) {
         if (runRepository.existsById(id)) {
             runRepository.removeById(id);
@@ -77,6 +79,7 @@ public class RunService {
                     runEntity.setFinishLatitude(run.getFinishLatitude());
                     runEntity.setFinishLongitude(run.getFinishLongitude());
                     runEntity.setFinishDatetime(OffsetDateTime.parse(run.getFinishDatetime()));
+                    runEntity.setDistance(run.getDistance());
                     return runMapper.mapEntityToDto(runRepository.save(runEntity));
                 })
                 .orElse(null);

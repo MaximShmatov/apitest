@@ -6,8 +6,8 @@ import javax.validation.ValidationException;
 
 public abstract class BaseController {
 
-    @ExceptionHandler(ValidationException.class)
-    public String handleValidationException() {
-        return null;
-    }
+//    @ExceptionHandler(ValidationException.class)
+//    public String handleValidationException() {
+//        return null;
+//    }
 }

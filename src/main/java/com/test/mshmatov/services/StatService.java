@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -44,7 +45,12 @@ public class StatService {
     }
 
     private Long calculateAverageSpeed(RunEntity run) {
-        long runTime = Duration.between(run.getStartDatetime(), run.getFinishDatetime()).toHours();
+        Long runTime = 0L;
+        OffsetDateTime startDate = run.getStartDatetime();
+        OffsetDateTime finishDate = run.getFinishDatetime();
+        if (!Objects.isNull(finishDate)) {
+            runTime = Duration.between(startDate, finishDate).toHours();
+        }
         return runTime == 0 ? 0 : run.getDistance() / runTime;
     }
 
@@ -53,7 +59,8 @@ public class StatService {
         AtomicReference<Long> totalDistance = new AtomicReference<>(0L);
         AtomicReference<Long> totalSpeed = new AtomicReference<>(0L);
         runs.forEach(run -> {
-            totalDistance.set(totalDistance.get() + run.getDistance());
+            var distance = Objects.isNull(run.getDistance()) ? 0 : run.getDistance();
+            totalDistance.set(totalDistance.get() + distance);
             totalSpeed.set(totalSpeed.get() + calculateAverageSpeed(run));
         });
         Long averageSpeed = runsQuantity == 0 ? 0 : totalSpeed.get() / runsQuantity;
